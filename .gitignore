@@ -1,0 +1,20 @@
+# Archivos generados por Android Studio
+*.iml
+/.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/caches
+/.idea/modules.xml
+/.idea/.name
+/.idea/compiler.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+
+# Agregar aquí otros archivos/directorios que desees ignorar
+
+# Ignorar google-services.json
+google-services.json
