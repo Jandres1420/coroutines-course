@@ -3,8 +3,10 @@ package com.pico.mvvm.coroutinesudemy.learningbasics
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
@@ -17,7 +19,12 @@ fun main(){
 //    coldFlow()
 //    cancelFlow()
 //    flowOperators()
-    terminalFlowOperators()
+//    terminalFlowOperators()
+    bufferFlow()
+}
+
+fun bufferFlow() {
+    TODO("Not yet implemented")
 }
 
 fun terminalFlowOperators() {
@@ -38,16 +45,36 @@ fun terminalFlowOperators() {
         //Toma el primero
         newTopic("First")
         val first = getDataByFlow()
-            .first()
+//            .first()
         println("First $first")
 
         // it will take the last value of the flow
         newTopic("Last")
         val last = getDataByFlow()
-            .last()
+//            .last()
         println("Last $last")
 
+        // accumula los valores anteriores y los va sumando o pues lo que diga en la ultima linea
+        newTopic("Reduce")
+        val saving = getDataByFlow()
+            .reduce { accumulator, value ->
+                println("Accumulator: $accumulator")
+                println("Value: $value")
+                println("Curret Saving: ${accumulator + value}")
+                accumulator + value
+            }
+        println("Saving: $saving")
 
+        // el acumulador va a comenzar desde lo qe se halla puesto, en este caso lastSaving, value el indice 0
+        newTopic("Fold")
+        val lastSaving = saving
+        val totalSaving = getDataByFlow()
+            .fold(lastSaving) { acc, value ->
+                println("Accumulator: $acc")
+                println("Value: $value")
+                println("Curret Saving: ${acc + value}")
+                acc + value
+            }
     }
 }
 
