@@ -2,16 +2,41 @@ package com.pico.mvvm.coroutinesudemy.learningbasics
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
 
 fun main(){
     //dispatchers()
     //nestedCoroutine()
     //playingWithNestedCoroutines()
     //changeWithContext()
+    basicFlows()
+}
+
+fun basicFlows() {
+    newTopic("Flows básico")
+    runBlocking {
+        launch { getDataByFlow().collect{ println(it) } }
+        launch { (1..50).forEach {
+            delay(someTime()/10)
+            println("Tarea 2...")
+        } }
+    }
+
+}
+fun getDataByFlow():Flow<Float> {
+    return flow{
+        (1..5).forEach{
+            println("Procesando datos...")
+            delay(someTime())
+            emit(20 + it + Random.nextFloat())
+        }
+    }
 }
 
 fun changeWithContext() {
