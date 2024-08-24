@@ -140,6 +140,6 @@ fun startMessage() {
     println("Comenzando corrutina- ${Thread.currentThread().name}-")
 }
 
-fun endMessage() {
-    println("Corrutina- ${Thread.currentThread().name}- finalizada")
+fun endMessage(info:String = "") {
+    println("Corrutina- ${Thread.currentThread().name} $info - finalizada")
 }

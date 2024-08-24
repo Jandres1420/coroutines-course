@@ -11,7 +11,23 @@ private const val SEPARATOR = "===================="
 fun main(){
     //lambda()
     //threads()
-    coroutinesVsThreads()
+    //coroutinesVsThreads()
+    sequences()
+}
+
+fun sequences() {
+    newTopic("Sequences")
+    getDataBySeq().forEach { println("$it°") }
+}
+
+fun getDataBySeq():Sequence<Float> {
+    return sequence{
+        (1..5).forEach{
+            println("Procesando datos...")
+            Thread.sleep(someTime())
+            yield(20 + it + Random.nextFloat())
+        }
+    }
 }
 
 fun coroutinesVsThreads() {
