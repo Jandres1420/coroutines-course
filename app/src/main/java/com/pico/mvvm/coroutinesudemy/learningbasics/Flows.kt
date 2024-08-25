@@ -1,8 +1,11 @@
 package com.pico.mvvm.coroutinesudemy.learningbasics
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
@@ -14,6 +17,8 @@ import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
+import kotlin.random.Random
+import kotlin.system.measureTimeMillis
 
 fun main(){
 //    coldFlow()
@@ -24,7 +29,29 @@ fun main(){
 }
 
 fun bufferFlow() {
-    TODO("Not yet implemented")
+    runBlocking {
+        newTopic("Buffer para Flow")
+        val time = measureTimeMillis {
+            getDataByFlowStatic()
+                .map { setFormat(it)  }
+                .buffer()
+                .collect{
+                    delay(500)
+                    println(it)
+                }
+        }
+        println("Time $time ms")
+    }
+}
+
+fun getDataByFlowStatic(): Flow<Float> {
+    return flow{
+        (1..5).forEach{
+            println("Procesando datos...")
+            delay(300)
+            emit(20 + it + Random.nextFloat())
+        }
+    }
 }
 
 fun terminalFlowOperators() {
